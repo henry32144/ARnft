@@ -78,6 +78,7 @@
           console.log(nft);
           postMessage({ type: 'endLoading', end: true }),
           (err) => {
+            postMessage({ type: 'error'})
             console.error('Error in loading marker on Worker', err)
           }
         })
@@ -86,6 +87,7 @@
       }
 
       const onError = (error) => {
+        postMessage({ type: 'error'})
         console.error(error)
       }
       const regexC = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)/igm

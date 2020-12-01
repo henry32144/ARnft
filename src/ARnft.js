@@ -83,7 +83,20 @@ export default class ARnft {
   }
 
   static async init (width, height, markerUrl, config, stats) {
+    var event = new Event("initARnft");
+    document.dispatchEvent(event);
+
     const nft = new ARnft(width, height, config)
+    document.addEventListener("nftError", () => {
+      console.log("ARnft init: nftError");
+      var event = new Event("ARnftError");
+      document.dispatchEvent(event);
+    });
+    document.addEventListener("endLoading", () => {
+      console.log("ARnft init: endLoading");
+      var event = new Event("ARnftEndLoading");
+      document.dispatchEvent(event);
+    });
     return await nft._initialize(markerUrl, stats)
   }
 

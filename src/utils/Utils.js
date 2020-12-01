@@ -224,6 +224,9 @@ export default class Utils {
                   loader.parentElement.removeChild(loader)
                 }, 2000)
               }
+              console.log("Utils : endLoading");
+              var event = new Event("endLoading");
+              document.dispatchEvent(event);
             }
             break
           }
@@ -239,6 +242,12 @@ export default class Utils {
           }
           case 'not found': {
             found(null)
+            break
+          }
+          case 'error': {
+            console.log("Utils : error");
+            var event = new Event("nftError");
+            document.dispatchEvent(event);
             break
           }
         }
