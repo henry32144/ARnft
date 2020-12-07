@@ -219,7 +219,7 @@ export default class Utils {
               // removing loader page if present
               const loader = document.getElementById('loading')
               if (loader) {
-                loader.querySelector('.loading-text').innerText = 'Start the tracking!'
+                loader.querySelector('.loading-text').innerText = 'Start!'
                 setTimeout(function () {
                   loader.parentElement.removeChild(loader)
                 }, 2000)
