@@ -92,12 +92,10 @@ export default class ARnft {
 
         const nft = new ARnft(width, height, config);
         document.addEventListener("nftError", () => {
-            console.log("ARnft init: nftError");
             var event = new Event("ARnftError");
             document.dispatchEvent(event);
         });
         document.addEventListener("endLoading", () => {
-            console.log("ARnft init: endLoading");
             var event = new Event("ARnftEndLoading");
             document.dispatchEvent(event);
         });
