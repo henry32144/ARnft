@@ -112,6 +112,10 @@ export default class ARnft {
     Utils.stopNFT();
   }
 
+  stop () {
+    Utils.stopNFT();
+  }
+
   add (obj) {
     const root = this.root
     document.addEventListener('getNFTData', (ev) => {

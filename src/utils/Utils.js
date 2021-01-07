@@ -254,6 +254,11 @@ export default class Utils {
       }
     }
 
+    document.addEventListener("terminateWorker", function() {
+      worker.postMessage({type: 'stop'})
+      worker.terminate();
+    });
+
     let world
 
     const found = (msg) => {
@@ -291,6 +296,14 @@ export default class Utils {
     process()
   }
   
+  static stopNFT () {
+    console.log("Stop NFT");
+    var event = new Event("terminateWorker");
+    document.dispatchEvent(event);
+    var event = new Event("stopStreaming");
+    document.dispatchEvent(event);
+  }
+
   static stopNFT () {
     console.log("Stop NFT");
     var event = new Event("terminateWorker");
