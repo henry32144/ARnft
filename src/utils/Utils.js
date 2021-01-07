@@ -120,6 +120,25 @@ export default class Utils {
       }
     }
 
+    document.addEventListener("stopStreaming", function() {
+      const stream = video.srcObject;
+      console.log("stop streaming");
+      if (stream !== null && stream !== undefined) {
+        const tracks = stream.getTracks();
+
+        tracks.forEach(function(track) {
+          track.stop();
+        });
+  
+        video.srcObject = null;
+
+        let currentAR = document.getElementById("app");
+        if (currentAR !== null && currentAR !== undefined) {
+          currentAR.remove();
+        }
+      }
+    });
+
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
         resolve(video)
@@ -199,11 +218,13 @@ export default class Utils {
               // removing loader page if present
               const loader = document.getElementById('loading')
               if (loader) {
-                loader.querySelector('.loading-text').innerText = 'Start the tracking!'
+                loader.querySelector('.loading-text').innerText = '開始偵測!'
                 setTimeout(function () {
                   loader.parentElement.removeChild(loader)
                 }, 2000)
               }
+              var event = new Event("endLoading");
+              document.dispatchEvent(event);
             }
             break
           }
@@ -219,6 +240,12 @@ export default class Utils {
           }
           case 'not found': {
             found(null)
+            break
+          }
+          case 'error': {
+            console.log("Utils : error");
+            var event = new Event("nftError");
+            document.dispatchEvent(event);
             break
           }
         }
@@ -262,6 +289,14 @@ export default class Utils {
     load()
     tick()
     process()
+  }
+  
+  static stopNFT () {
+    console.log("Stop NFT");
+    var event = new Event("terminateWorker");
+    document.dispatchEvent(event);
+    var event = new Event("stopStreaming");
+    document.dispatchEvent(event);
   }
 
   static interpolate (world) {

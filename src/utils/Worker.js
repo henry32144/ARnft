@@ -8,6 +8,10 @@ onmessage = (e) => {
       load(msg)
       return
     }
+    case 'stop': {
+      ar = null;
+      break;
+    }
     case 'process': {
       next = msg.imagedata
       process()
